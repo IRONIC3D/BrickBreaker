@@ -51,6 +51,16 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _brickLayer.position = CGPointMake(0, self.size.height);
         [self addChild:_brickLayer];
         
+        // Add some bricks *****TEMP*****
+        for (int row = 0; row < 5; row++) {
+            for (int column = 0; column < 6; column++) {
+                SKSpriteNode *brick = [SKSpriteNode spriteNodeWithImageNamed:@"BrickGreen"];
+                brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * column),
+                                             -(2 + (brick.size.height * 0.5) + (brick.size.height + 3) * row));
+                [_brickLayer addChild:brick];
+            }
+        }
+        
         // Set initial values
         _ballSpeed = 250.0;
     }
