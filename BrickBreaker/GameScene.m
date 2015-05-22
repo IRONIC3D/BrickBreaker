@@ -8,15 +8,28 @@
 
 #import "GameScene.h"
 
+
 @implementation GameScene {
     SKSpriteNode *_paddle;
     CGPoint _touchLocation;
 }
 
+#pragma mark -
+#pragma mark Category Bit Masks
+
+static const uint32_t kBallCategory         = 0x1 << 0;
+static const uint32_t kPaddleCategory       = 0x1 << 1;
+
+#pragma mark -
+#pragma mark SK Methods
+
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         self.backgroundColor = [SKColor whiteColor];
+        
+        // Setup world physics properties
         self.physicsWorld.gravity = CGVectorMake(0.0, 0.0);
+        self.physicsWorld.contactDelegate = self;
         
         // Setup edge
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
@@ -27,6 +40,8 @@
         _paddle.position = CGPointMake(CGRectGetMidX(self.frame), 90);
         _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
         _paddle.physicsBody.dynamic = NO;
+        _paddle.physicsBody.categoryBitMask = kPaddleCategory;
+        
         [self addChild:_paddle];
     }
     
@@ -78,9 +93,18 @@
     ball.physicsBody.linearDamping = 0.0;
     ball.physicsBody.restitution = 1.0;
     ball.physicsBody.velocity = velocity;
+    ball.physicsBody.categoryBitMask = kBallCategory;
+    ball.physicsBody.contactTestBitMask = kPaddleCategory;
     [self addChild:ball];
     
     return ball;
+}
+
+#pragma makr -
+#pragma mark SKPhysics Delegate Method
+
+-(void)didBeginContact:(SKPhysicsContact *)contact {
+    
 }
 
 @end
