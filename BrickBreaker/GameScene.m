@@ -13,6 +13,7 @@
     SKSpriteNode *_paddle;
     CGPoint _touchLocation;
     CGFloat _ballSpeed;
+    SKNode *_brickLayer;
 }
 
 #pragma mark -
@@ -44,6 +45,11 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _paddle.physicsBody.categoryBitMask = kPaddleCategory;
         
         [self addChild:_paddle];
+        
+        // Setup brick layer
+        _brickLayer = [SKNode node];
+        _brickLayer.position = CGPointMake(0, self.size.height);
+        [self addChild:_brickLayer];
         
         // Set initial values
         _ballSpeed = 250.0;
