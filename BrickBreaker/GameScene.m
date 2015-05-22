@@ -10,6 +10,7 @@
 
 @implementation GameScene {
     SKSpriteNode *_paddle;
+    CGPoint _touchLocation;
 }
 
 -(instancetype)initWithSize:(CGSize)size {
@@ -25,7 +26,21 @@
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
+    for (UITouch *touch in touches) {
+        _touchLocation = [touch locationInNode:self];
+    }
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    for (UITouch *touch in touches) {
+        // Calculating how far touch moved on x axis
+        CGFloat xMovement = [touch locationInNode:self].x - _touchLocation.x;
+        
+        // Move paddle distance of touch
+        _paddle.position = CGPointMake(_paddle.position.x + xMovement, _paddle.position.y);
+        
+        _touchLocation = [touch locationInNode:self];
+    }
 }
 
 -(void)update:(CFTimeInterval)currentTime {
