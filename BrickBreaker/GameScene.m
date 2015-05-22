@@ -25,6 +25,8 @@
         
         _paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle"];
         _paddle.position = CGPointMake(CGRectGetMidX(self.frame), 90);
+        _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
+        _paddle.physicsBody.dynamic = NO;
         [self addChild:_paddle];
     }
     
