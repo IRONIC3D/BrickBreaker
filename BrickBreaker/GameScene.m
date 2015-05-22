@@ -21,6 +21,7 @@
 
 static const uint32_t kBallCategory         = 0x1 << 0;
 static const uint32_t kPaddleCategory       = 0x1 << 1;
+static const uint32_t kBrickCategory   = 0x1 << 2;
 
 #pragma mark -
 #pragma mark SK Methods
@@ -57,6 +58,9 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
                 SKSpriteNode *brick = [SKSpriteNode spriteNodeWithImageNamed:@"BrickGreen"];
                 brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * column),
                                              -(2 + (brick.size.height * 0.5) + (brick.size.height + 3) * row));
+                brick.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:brick.size];
+                brick.physicsBody.dynamic = NO;
+                brick.physicsBody.categoryBitMask = kBrickCategory;
                 [_brickLayer addChild:brick];
             }
         }
@@ -114,7 +118,7 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
     ball.physicsBody.restitution = 1.0;
     ball.physicsBody.velocity = velocity;
     ball.physicsBody.categoryBitMask = kBallCategory;
-    ball.physicsBody.contactTestBitMask = kPaddleCategory;
+    ball.physicsBody.contactTestBitMask = kPaddleCategory | kBrickCategory;
     [self addChild:ball];
     
     return ball;
@@ -150,6 +154,12 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
             // Set ball's velocity based on direction and speed.
             firstBody.velocity = CGVectorMake(direction.dx * _ballSpeed, direction.dy * _ballSpeed);
         }
+    }
+    
+    if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
+        // By using an action, the removal of the brick will be delayed till the next frame
+        // This way we can see the brick where the ball bounces of it, and removed on the next frame
+        [secondBody.node runAction:[SKAction removeFromParent]];
     }
 }
 
