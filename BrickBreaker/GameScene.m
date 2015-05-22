@@ -8,11 +8,17 @@
 
 #import "GameScene.h"
 
-@implementation GameScene
+@implementation GameScene {
+    SKSpriteNode *_paddle;
+}
 
 -(instancetype)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         self.backgroundColor = [SKColor whiteColor];
+        
+        _paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle"];
+        _paddle.position = CGPointMake(CGRectGetMidX(self.frame), 90);
+        [self addChild:_paddle];
     }
     
     return self;
