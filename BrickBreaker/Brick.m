@@ -33,4 +33,22 @@
     return self;
 }
 
+-(void)hit {
+    switch (self.type) {
+        case Green:
+            // By using an action, the removal of the brick will be delayed till the next frame
+            // This way we can see the brick where the ball bounces of it, and removed on the next frame
+            [self runAction:[SKAction removeFromParent]];
+            break;
+            
+        case Blue:
+            self.texture = [SKTexture textureWithImageNamed:@"BrickGreen"];
+            self.type = Green;
+            break;
+            
+        default:
+            break;
+    }
+}
+
 @end

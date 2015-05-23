@@ -55,7 +55,12 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         // Add some bricks *****TEMP*****
         for (int row = 0; row < 5; row++) {
             for (int column = 0; column < 6; column++) {
-                Brick *brick = [[Brick alloc] initWithType:Green];
+                Brick *brick;
+                if (row == 4) {
+                    brick = [[Brick alloc] initWithType:Blue];
+                } else {
+                    brick = [[Brick alloc] initWithType:Green];
+                }
                 brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * column),
                                              -(2 + (brick.size.height * 0.5) + (brick.size.height + 3) * row));
                 [_brickLayer addChild:brick];
@@ -154,9 +159,9 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
     }
     
     if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
-        // By using an action, the removal of the brick will be delayed till the next frame
-        // This way we can see the brick where the ball bounces of it, and removed on the next frame
-        [secondBody.node runAction:[SKAction removeFromParent]];
+        if ([secondBody.node respondsToSelector:@selector(hit)]) {
+            [secondBody.node performSelector:@selector(hit)];
+        }
     }
 }
 
