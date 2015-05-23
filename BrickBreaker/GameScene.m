@@ -16,6 +16,7 @@
     CGFloat _ballSpeed;
     SKNode *_brickLayer;
     BOOL _ballReleased;
+    int _currentLevel;
 }
 
 #pragma mark -
@@ -43,24 +44,22 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
         _paddle.physicsBody.dynamic = NO;
         _paddle.physicsBody.categoryBitMask = kPaddleCategory;
-        
         [self addChild:_paddle];
-        
-        // Create positioning ball
-        SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"BallBlue"];
-        ball.position = CGPointMake(0, _paddle.size.height);
-        [_paddle addChild:ball];
         
         // Setup brick layer
         _brickLayer = [SKNode node];
         _brickLayer.position = CGPointMake(0, self.size.height);
         [self addChild:_brickLayer];
         
-        [self loadLevel:0];
         
         // Set initial values
         _ballSpeed = 250.0;
         _ballReleased = NO;
+        _currentLevel = 0;
+        
+        // Start a new level
+        [self loadLevel:_currentLevel];
+        [self newBall];
     }
     
     return self;
@@ -107,10 +106,29 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    
+    if ([self isLevelComplete]) {
+        _currentLevel++;
+        [self loadLevel:_currentLevel];
+        [self newBall];
+    }
 }
 
 #pragma mark -
 #pragma mark User Methods
+
+-(void)newBall {
+    [self enumerateChildNodesWithName:@"ball" usingBlock:^(SKNode *node, BOOL *stop) {
+        [node removeFromParent];
+    }];
+    
+    SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"BallBlue"];
+    ball.position = CGPointMake(0, _paddle.size.height);
+    [_paddle addChild:ball];
+    _ballReleased = NO;
+    _paddle.position = CGPointMake(self.size.width * 0.5, _paddle.position.y);
+    
+}
 
 -(SKSpriteNode *)createBallWithLocation:(CGPoint)position andVelocity:(CGVector)velocity {
     SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"BallBlue"];
@@ -129,6 +147,10 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
 }
 
 -(void)loadLevel:(int)LevelNumber {
+    
+    // Clean _BrickLayer
+    [_brickLayer removeAllChildren];
+    
     NSArray *level = nil;
     
     switch (LevelNumber) {
