@@ -184,6 +184,21 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
     }
 }
 
+-(BOOL)isLevelComplete {
+    
+    // Looking for bricks that are not indestructible.
+    for (SKNode *node in _brickLayer.children) {
+        if ([node isKindOfClass:[Brick class]]) {
+            if (!((Brick*)node).indestructible) {
+                return NO;
+            }
+        }
+    }
+    
+    // Couldn't find any non-indestructible bricks
+    return YES;
+}
+
 #pragma makr -
 #pragma mark SKPhysics Delegate Method
 
