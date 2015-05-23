@@ -27,6 +27,7 @@
         self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
         self.physicsBody.categoryBitMask = kBrickCategory;
         self.physicsBody.dynamic = NO;
+        self.type = type;
     }
     
     return self;
