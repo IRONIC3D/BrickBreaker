@@ -15,6 +15,7 @@
     CGPoint _touchLocation;
     CGFloat _ballSpeed;
     SKNode *_brickLayer;
+    BOOL _ballReleased;
 }
 
 #pragma mark -
@@ -37,8 +38,6 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         // Setup edge
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
         
-        [self createBallWithLocation:CGPointMake(self.size.width * 0.5, self.size.height * 0.5) andVelocity:CGVectorMake(40, 180)];
-        
         _paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle"];
         _paddle.position = CGPointMake(CGRectGetMidX(self.frame), 90);
         _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
@@ -46,6 +45,11 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _paddle.physicsBody.categoryBitMask = kPaddleCategory;
         
         [self addChild:_paddle];
+        
+        // Create positioning ball
+        SKSpriteNode *ball = [SKSpriteNode spriteNodeWithImageNamed:@"BallBlue"];
+        ball.position = CGPointMake(0, _paddle.size.height);
+        [_paddle addChild:ball];
         
         // Setup brick layer
         _brickLayer = [SKNode node];
@@ -56,6 +60,7 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         
         // Set initial values
         _ballSpeed = 250.0;
+        _ballReleased = NO;
     }
     
     return self;
@@ -87,6 +92,16 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         }
         
         _touchLocation = [touch locationInNode:self];
+    }
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (!_ballReleased) {
+        _ballReleased = YES;
+        
+        [_paddle removeAllChildren];
+        
+        [self createBallWithLocation:CGPointMake(_paddle.position.x, _paddle.position.y + _paddle.size.height) andVelocity:CGVectorMake(0, _ballSpeed)];
     }
 }
 
