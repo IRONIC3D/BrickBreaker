@@ -52,20 +52,7 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _brickLayer.position = CGPointMake(0, self.size.height);
         [self addChild:_brickLayer];
         
-        // Add some bricks *****TEMP*****
-        for (int row = 0; row < 5; row++) {
-            for (int column = 0; column < 6; column++) {
-                Brick *brick;
-                if (row == 4) {
-                    brick = [[Brick alloc] initWithType:Blue];
-                } else {
-                    brick = [[Brick alloc] initWithType:Green];
-                }
-                brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * column),
-                                             -(2 + (brick.size.height * 0.5) + (brick.size.height + 3) * row));
-                [_brickLayer addChild:brick];
-            }
-        }
+        [self loadLevel:0];
         
         // Set initial values
         _ballSpeed = 250.0;
@@ -124,6 +111,52 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
     [self addChild:ball];
     
     return ball;
+}
+
+-(void)loadLevel:(int)LevelNumber {
+    NSArray *level = nil;
+    
+    switch (LevelNumber) {
+        case 0:
+            level = @[@[@1, @1, @1, @1, @1, @1],
+                      @[@1, @1, @1, @1, @1, @1],
+                      @[@0, @0, @0, @0, @0, @0],
+                      @[@0, @0, @0, @0, @0, @0],
+                      @[@2, @2, @2, @2, @2, @2]];
+            break;
+            
+        case 1:
+            level = @[@[@1, @1, @1, @1, @1, @1],
+                      @[@1, @1, @1, @1, @1, @1],
+                      @[@0, @0, @0, @0, @0, @0],
+                      @[@0, @0, @0, @0, @0, @0],
+                      @[@2, @2, @2, @2, @2, @2]];
+            break;
+            
+        default:
+            break;
+    }
+    
+    int row = 0;
+    int col = 0;
+    
+    for (NSArray *rowBricks in level) {
+        // Reset the column number
+        col = 0;
+        
+        for (NSNumber *brickType in rowBricks) {
+            if ([brickType intValue] > 0) {
+                Brick *brick = [[Brick alloc] initWithType:(BrickType)[brickType intValue]];
+                if (brick) {
+                    brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * col),
+                                                 -(2 + (brick.size.height * 0.5) + (brick.size.height + 3) * row));
+                    [_brickLayer addChild:brick];
+                }
+            }
+            col++;
+        }
+        row++;
+    }
 }
 
 #pragma makr -
