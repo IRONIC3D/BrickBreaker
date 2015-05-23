@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "Brick.h"
 
 
 @implementation GameScene {
@@ -21,7 +22,6 @@
 
 static const uint32_t kBallCategory         = 0x1 << 0;
 static const uint32_t kPaddleCategory       = 0x1 << 1;
-static const uint32_t kBrickCategory   = 0x1 << 2;
 
 #pragma mark -
 #pragma mark SK Methods
@@ -55,12 +55,9 @@ static const uint32_t kBrickCategory   = 0x1 << 2;
         // Add some bricks *****TEMP*****
         for (int row = 0; row < 5; row++) {
             for (int column = 0; column < 6; column++) {
-                SKSpriteNode *brick = [SKSpriteNode spriteNodeWithImageNamed:@"BrickGreen"];
+                Brick *brick = [[Brick alloc] initWithType:Green];
                 brick.position = CGPointMake(2 + (brick.size.width * 0.5) + ((brick.size.width + 3) * column),
                                              -(2 + (brick.size.height * 0.5) + (brick.size.height + 3) * row));
-                brick.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:brick.size];
-                brick.physicsBody.dynamic = NO;
-                brick.physicsBody.categoryBitMask = kBrickCategory;
                 [_brickLayer addChild:brick];
             }
         }
