@@ -17,6 +17,7 @@
     SKNode *_brickLayer;
     BOOL _ballReleased;
     int _currentLevel;
+    BOOL _positionBall;
 }
 
 #pragma mark -
@@ -67,6 +68,9 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     for (UITouch *touch in touches) {
+        if (!_ballReleased) {
+            _positionBall = YES;
+        }
         _touchLocation = [touch locationInNode:self];
     }
 }
@@ -95,7 +99,8 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (!_ballReleased) {
+    if (_positionBall) {
+        _positionBall = NO;
         _ballReleased = YES;
         
         [_paddle removeAllChildren];
