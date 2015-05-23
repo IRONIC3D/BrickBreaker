@@ -9,6 +9,12 @@
 #import "GameScene.h"
 #import "Brick.h"
 
+@interface GameScene()
+
+@property (nonatomic) int lives;
+
+@end
+
 
 @implementation GameScene {
     SKSpriteNode *_paddle;
@@ -39,18 +45,9 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         self.physicsWorld.contactDelegate = self;
         
         // Setup edge
-        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:CGRectMake(0, -128, size.width, size.height + 100)];
         
-        // Setup hearts
-        _hearts = @[[SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"],
-                    [SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"]];
-        
-        for (NSUInteger i = 0; i < _hearts.count; i++) {
-            SKSpriteNode *heart = (SKSpriteNode*)[_hearts objectAtIndex:i];
-            heart.position = CGPointMake(self.size.width - (16 + (29 * i)), self.size.height - 14);
-            [self addChild:heart];
-        }
-        
+        // Setup paddle
         _paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle"];
         _paddle.position = CGPointMake(CGRectGetMidX(self.frame), 90);
         _paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:_paddle.size];
@@ -60,14 +57,35 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         
         // Setup brick layer
         _brickLayer = [SKNode node];
-        _brickLayer.position = CGPointMake(0, self.size.height);
+        _brickLayer.position = CGPointMake(0, self.size.height - 28);
         [self addChild:_brickLayer];
         
+        // Add HUD bar
+        SKSpriteNode *hud = [SKSpriteNode spriteNodeWithColor:[SKColor colorWithRed:0.94
+                                                                              green:0.94
+                                                                               blue:0.94
+                                                                              alpha:1]
+                                                         size:CGSizeMake(size.width, 28)];
+        hud.position = CGPointMake(0, size.height);
+        hud.anchorPoint = CGPointMake(0, 1);
+        [self addChild:hud];
+        
+        
+        // Setup hearts 26x22
+        _hearts = @[[SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"],
+                    [SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"]];
+        
+        for (NSUInteger i = 0; i < _hearts.count; i++) {
+            SKSpriteNode *heart = (SKSpriteNode*)[_hearts objectAtIndex:i];
+            heart.position = CGPointMake(self.size.width - (16 + (29 * i)), self.size.height - 14);
+            [self addChild:heart];
+        }
         
         // Set initial values
         _ballSpeed = 250.0;
         _ballReleased = NO;
         _currentLevel = 0;
+        self.lives = 1;
         
         // Start a new level
         [self loadLevel:_currentLevel];
@@ -127,6 +145,22 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _currentLevel++;
         [self loadLevel:_currentLevel];
         [self newBall];
+    }
+}
+
+#pragma mark -
+#pragma mark Overide Methods
+
+-(void)setLives:(int)lives {
+    _lives = lives;
+    
+    for (NSUInteger i = 0; i < _hearts.count; i++) {
+        SKSpriteNode *heart = (SKSpriteNode*)[_hearts objectAtIndex:i];
+        if (lives > i) {
+            heart.texture = [SKTexture textureWithImageNamed:@"HeartFull"];
+        } else {
+            heart.texture = [SKTexture textureWithImageNamed:@"HeartEmpty"];
+        }
     }
 }
 
