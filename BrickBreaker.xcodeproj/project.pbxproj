@@ -10,6 +10,8 @@
 		AE775DB31B0FE81B00C53E8C /* BrickBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE775DB21B0FE81B00C53E8C /* BrickBlue@2x.png */; };
 		AE775DB61B0FE87300C53E8C /* Brick.m in Sources */ = {isa = PBXBuildFile; fileRef = AE775DB51B0FE87300C53E8C /* Brick.m */; };
 		AE775DB81B105D6E00C53E8C /* BrickGrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE775DB71B105D6E00C53E8C /* BrickGrey@2x.png */; };
+		AE775DBB1B10665500C53E8C /* HeartEmpty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE775DB91B10665500C53E8C /* HeartEmpty@2x.png */; };
+		AE775DBC1B10665500C53E8C /* HeartFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE775DBA1B10665500C53E8C /* HeartFull@2x.png */; };
 		E6A076271B0EB3C700729241 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A076261B0EB3C700729241 /* main.m */; };
 		E6A0762A1B0EB3C700729241 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A076291B0EB3C700729241 /* AppDelegate.m */; };
 		E6A0762D1B0EB3C700729241 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0762C1B0EB3C700729241 /* GameScene.m */; };
@@ -38,6 +40,8 @@
 		AE775DB41B0FE87300C53E8C /* Brick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Brick.h; sourceTree = "<group>"; };
 		AE775DB51B0FE87300C53E8C /* Brick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Brick.m; sourceTree = "<group>"; };
 		AE775DB71B105D6E00C53E8C /* BrickGrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BrickGrey@2x.png"; sourceTree = "<group>"; };
+		AE775DB91B10665500C53E8C /* HeartEmpty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeartEmpty@2x.png"; sourceTree = "<group>"; };
+		AE775DBA1B10665500C53E8C /* HeartFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeartFull@2x.png"; sourceTree = "<group>"; };
 		E6A076211B0EB3C700729241 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A076251B0EB3C700729241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6A076261B0EB3C700729241 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				AE775DB21B0FE81B00C53E8C /* BrickBlue@2x.png */,
 				AE775DB71B105D6E00C53E8C /* BrickGrey@2x.png */,
 				E6A076521B0ED9A100729241 /* Paddle@2x.png */,
+				AE775DB91B10665500C53E8C /* HeartEmpty@2x.png */,
+				AE775DBA1B10665500C53E8C /* HeartFull@2x.png */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -232,10 +238,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE775DBC1B10665500C53E8C /* HeartFull@2x.png in Resources */,
 				E6A076541B0ED9A100729241 /* BrickGreen@2x.png in Resources */,
 				E6A0763A1B0EB3C700729241 /* LaunchScreen.xib in Resources */,
 				E6A076551B0ED9A100729241 /* Paddle@2x.png in Resources */,
 				E6A076371B0EB3C700729241 /* Images.xcassets in Resources */,
+				AE775DBB1B10665500C53E8C /* HeartEmpty@2x.png in Resources */,
 				E6A076351B0EB3C700729241 /* Main.storyboard in Resources */,
 				AE775DB31B0FE81B00C53E8C /* BrickBlue@2x.png in Resources */,
 				E6A076531B0ED9A100729241 /* BallBlue@2x.png in Resources */,

@@ -18,6 +18,7 @@
     BOOL _ballReleased;
     int _currentLevel;
     BOOL _positionBall;
+    NSArray *_hearts;
 }
 
 #pragma mark -
@@ -39,6 +40,16 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         
         // Setup edge
         self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+        
+        // Setup hearts
+        _hearts = @[[SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"],
+                    [SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"]];
+        
+        for (NSUInteger i = 0; i < _hearts.count; i++) {
+            SKSpriteNode *heart = (SKSpriteNode*)[_hearts objectAtIndex:i];
+            heart.position = CGPointMake(self.size.width - (16 + (29 * i)), self.size.height - 14);
+            [self addChild:heart];
+        }
         
         _paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle"];
         _paddle.position = CGPointMake(CGRectGetMidX(self.frame), 90);
