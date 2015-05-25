@@ -45,12 +45,36 @@
     return self;
 }
 
--(void)hide {
+-(void)show {
+    SKAction *slideLeft = [SKAction moveByX:-260 y:0.0 duration:0.5];
+    slideLeft.timingMode = SKActionTimingEaseOut;
     
+    SKAction *slideRight = [SKAction moveByX:260 y:0.0 duration:0.5];
+    slideRight.timingMode = SKActionTimingEaseOut;
+    
+    _menuPanel.position = CGPointMake(260, _menuPanel.position.y);
+    _playButton.position = CGPointMake(-260, _playButton.position.y);
+    
+    [_menuPanel runAction:slideLeft];
+    [_playButton runAction:slideRight];
+    
+    self.hidden = NO;
 }
 
--(void)show {
+-(void)hide {
+    SKAction *slideLeft = [SKAction moveByX:-260 y:0.0 duration:0.5];
+    slideLeft.timingMode = SKActionTimingEaseIn;
     
+    SKAction *slideRight = [SKAction moveByX:260 y:0.0 duration:0.5];
+    slideRight.timingMode = SKActionTimingEaseIn;
+    
+    _menuPanel.position = CGPointMake(0, _menuPanel.position.y);
+    _playButton.position = CGPointMake(0, _playButton.position.y);
+    
+    [_menuPanel runAction:slideLeft];
+    [_playButton runAction:slideRight completion:^{
+        self.hidden = YES;
+    }];
 }
 
 @end
