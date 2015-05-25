@@ -31,10 +31,12 @@
         [_menuPanel addChild:_panelText];
         
         _playButton = [SKSpriteNode spriteNodeWithImageNamed:@"Button"];
+        _playButton.name = @"Play Button";
         _playButton.position = CGPointMake(0, -((_menuPanel.size.height * 0.5) + (_playButton.size.height * 0.5) + 10));
         [self addChild:_playButton];
         
         _buttonText = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+        _buttonText.name = @"Play Button";
         _buttonText.fontColor = [SKColor colorWithRed:0.05 green:0.25 blue:0.44 alpha:1];
         _buttonText.fontSize = 15.0;
         _buttonText.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
@@ -43,6 +45,11 @@
         [_playButton addChild:_buttonText];
     }
     return self;
+}
+
+-(void)setLevelNumber:(int)levelNumber {
+    _levelNumber = levelNumber;
+    _panelText.text = [NSString stringWithFormat:@"LEVEL %d", levelNumber ];
 }
 
 -(void)show {
