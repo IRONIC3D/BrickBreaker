@@ -42,6 +42,7 @@
         case Green:
             // By using an action, the removal of the brick will be delayed till the next frame
             // This way we can see the brick where the ball bounces of it, and removed on the next frame
+            [self createExplosion];
             [self runAction:[SKAction removeFromParent]];
             break;
             
@@ -54,6 +55,18 @@
             // If Brick is Grey, then it is indestructible
             break;
     }
+}
+
+-(void)createExplosion {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"BrickExplosion" ofType:@"sks"];
+    SKEmitterNode *explosion = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    explosion.position = self.position;
+    [self.parent addChild:explosion];
+    
+    // Clean up after ourselves
+    SKAction *removeExplosion = [SKAction sequence:@[[SKAction waitForDuration:explosion.particleLifetime + explosion.particleLifetimeRange],
+                                                     [SKAction removeFromParent]]];
+    [explosion runAction:removeExplosion];
 }
 
 @end
