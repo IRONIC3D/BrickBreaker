@@ -23,6 +23,9 @@
         case Grey:
             self = [super initWithImageNamed:@"BrickGrey"];
             break;
+        case Yellow:
+            self = [super initWithImageNamed:@"BrickYellow"];
+            break;
         default:
             self = nil;
             break;
@@ -34,6 +37,7 @@
         self.physicsBody.dynamic = NO;
         self.type = type;
         self.indestructible = (type == Grey);
+        self.spawnsExtraBall = (type == Yellow);
         
         _brickSmashSound = [SKAction playSoundFileNamed:@"BrickSmash.caf" waitForCompletion:NO];
     }
@@ -54,6 +58,12 @@
         case Blue:
             self.texture = [SKTexture textureWithImageNamed:@"BrickGreen"];
             self.type = Green;
+            break;
+            
+        case Yellow:
+            [self createExplosion];
+            [self runAction:_brickSmashSound];
+            [self runAction:[SKAction removeFromParent]];
             break;
             
         default:

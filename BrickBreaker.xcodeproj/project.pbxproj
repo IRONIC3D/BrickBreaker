@@ -22,6 +22,7 @@
 		E65A5AB11B12CB0500BE9455 /* LevelUp.caf in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AAC1B12CB0500BE9455 /* LevelUp.caf */; };
 		E65A5AB21B12CB0500BE9455 /* LoseLife.caf in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AAD1B12CB0500BE9455 /* LoseLife.caf */; };
 		E65A5AB31B12CB0500BE9455 /* PaddleBounce.caf in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AAE1B12CB0500BE9455 /* PaddleBounce.caf */; };
+		E65A5AB51B12CDF600BE9455 /* BrickYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AB41B12CDF600BE9455 /* BrickYellow@2x.png */; };
 		E6A076271B0EB3C700729241 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A076261B0EB3C700729241 /* main.m */; };
 		E6A0762A1B0EB3C700729241 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A076291B0EB3C700729241 /* AppDelegate.m */; };
 		E6A0762D1B0EB3C700729241 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0762C1B0EB3C700729241 /* GameScene.m */; };
@@ -63,6 +64,7 @@
 		E65A5AAC1B12CB0500BE9455 /* LevelUp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LevelUp.caf; sourceTree = "<group>"; };
 		E65A5AAD1B12CB0500BE9455 /* LoseLife.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LoseLife.caf; sourceTree = "<group>"; };
 		E65A5AAE1B12CB0500BE9455 /* PaddleBounce.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PaddleBounce.caf; sourceTree = "<group>"; };
+		E65A5AB41B12CDF600BE9455 /* BrickYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BrickYellow@2x.png"; sourceTree = "<group>"; };
 		E6A076211B0EB3C700729241 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A076251B0EB3C700729241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6A076261B0EB3C700729241 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				E6A076511B0ED9A100729241 /* BrickGreen@2x.png */,
 				AE775DB21B0FE81B00C53E8C /* BrickBlue@2x.png */,
 				AE775DB71B105D6E00C53E8C /* BrickGrey@2x.png */,
+				E65A5AB41B12CDF600BE9455 /* BrickYellow@2x.png */,
 				E6A076521B0ED9A100729241 /* Paddle@2x.png */,
 				AE775DB91B10665500C53E8C /* HeartEmpty@2x.png */,
 				AE775DBA1B10665500C53E8C /* HeartFull@2x.png */,
@@ -300,6 +303,7 @@
 				E65A5AA01B12B92300BE9455 /* BrickExplosion.sks in Resources */,
 				E65A5AB11B12CB0500BE9455 /* LevelUp.caf in Resources */,
 				E65A5AB31B12CB0500BE9455 /* PaddleBounce.caf in Resources */,
+				E65A5AB51B12CDF600BE9455 /* BrickYellow@2x.png in Resources */,
 				E65A5AB21B12CB0500BE9455 /* LoseLife.caf in Resources */,
 				E65A5AAF1B12CB0500BE9455 /* BallBounce.caf in Resources */,
 				E65A5AB01B12CB0500BE9455 /* BrickSmash.caf in Resources */,
