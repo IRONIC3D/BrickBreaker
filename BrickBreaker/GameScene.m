@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "Brick.h"
+#import "Menu.h"
 
 @interface GameScene()
 
@@ -26,6 +27,7 @@
     BOOL _positionBall;
     NSArray *_hearts;
     SKLabelNode *_levelDisplay;
+    Menu *_menu;
 }
 
 #pragma mark -
@@ -91,6 +93,11 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
             heart.position = CGPointMake(self.size.width - (16 + (29 * i)), self.size.height - 14);
             [self addChild:heart];
         }
+        
+        // Setup menu
+        _menu = [[Menu alloc] init];
+        _menu.position = CGPointMake(self.size.width * 0.5, self.size.height * 0.5);
+        [self addChild:_menu];
         
         // Set initial values
         _ballSpeed = 250.0;

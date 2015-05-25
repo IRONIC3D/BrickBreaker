@@ -14,6 +14,9 @@
 		AE775DBC1B10665500C53E8C /* HeartFull@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE775DBA1B10665500C53E8C /* HeartFull@2x.png */; };
 		E65A5AA01B12B92300BE9455 /* BrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = E65A5A9E1B12B92300BE9455 /* BrickExplosion.sks */; };
 		E65A5AA11B12B92300BE9455 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = E65A5A9F1B12B92300BE9455 /* spark.png */; };
+		E65A5AA41B12C47000BE9455 /* Button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AA21B12C47000BE9455 /* Button@2x.png */; };
+		E65A5AA51B12C47000BE9455 /* MenuPanel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E65A5AA31B12C47000BE9455 /* MenuPanel@2x.png */; };
+		E65A5AA81B12C49600BE9455 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = E65A5AA71B12C49600BE9455 /* Menu.m */; };
 		E6A076271B0EB3C700729241 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A076261B0EB3C700729241 /* main.m */; };
 		E6A0762A1B0EB3C700729241 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A076291B0EB3C700729241 /* AppDelegate.m */; };
 		E6A0762D1B0EB3C700729241 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = E6A0762C1B0EB3C700729241 /* GameScene.m */; };
@@ -46,6 +49,10 @@
 		AE775DBA1B10665500C53E8C /* HeartFull@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "HeartFull@2x.png"; sourceTree = "<group>"; };
 		E65A5A9E1B12B92300BE9455 /* BrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrickExplosion.sks; sourceTree = "<group>"; };
 		E65A5A9F1B12B92300BE9455 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		E65A5AA21B12C47000BE9455 /* Button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Button@2x.png"; sourceTree = "<group>"; };
+		E65A5AA31B12C47000BE9455 /* MenuPanel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MenuPanel@2x.png"; sourceTree = "<group>"; };
+		E65A5AA61B12C49600BE9455 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Menu.h; sourceTree = "<group>"; };
+		E65A5AA71B12C49600BE9455 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Menu.m; sourceTree = "<group>"; };
 		E6A076211B0EB3C700729241 /* BrickBreaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BrickBreaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6A076251B0EB3C700729241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6A076261B0EB3C700729241 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -122,6 +129,8 @@
 				E6A0762C1B0EB3C700729241 /* GameScene.m */,
 				AE775DB41B0FE87300C53E8C /* Brick.h */,
 				AE775DB51B0FE87300C53E8C /* Brick.m */,
+				E65A5AA61B12C49600BE9455 /* Menu.h */,
+				E65A5AA71B12C49600BE9455 /* Menu.m */,
 				E6A076301B0EB3C700729241 /* GameViewController.h */,
 				E6A076311B0EB3C700729241 /* GameViewController.m */,
 				E6A076331B0EB3C700729241 /* Main.storyboard */,
@@ -161,6 +170,8 @@
 		E6A0764F1B0ED99800729241 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				E65A5AA21B12C47000BE9455 /* Button@2x.png */,
+				E65A5AA31B12C47000BE9455 /* MenuPanel@2x.png */,
 				E6A076501B0ED9A100729241 /* BallBlue@2x.png */,
 				E6A076511B0ED9A100729241 /* BrickGreen@2x.png */,
 				AE775DB21B0FE81B00C53E8C /* BrickBlue@2x.png */,
@@ -261,6 +272,8 @@
 				AE775DBB1B10665500C53E8C /* HeartEmpty@2x.png in Resources */,
 				E6A076351B0EB3C700729241 /* Main.storyboard in Resources */,
 				AE775DB31B0FE81B00C53E8C /* BrickBlue@2x.png in Resources */,
+				E65A5AA41B12C47000BE9455 /* Button@2x.png in Resources */,
+				E65A5AA51B12C47000BE9455 /* MenuPanel@2x.png in Resources */,
 				E65A5AA01B12B92300BE9455 /* BrickExplosion.sks in Resources */,
 				E6A076531B0ED9A100729241 /* BallBlue@2x.png in Resources */,
 				AE775DB81B105D6E00C53E8C /* BrickGrey@2x.png in Resources */,
@@ -283,6 +296,7 @@
 			files = (
 				E6A076321B0EB3C700729241 /* GameViewController.m in Sources */,
 				E6A0762A1B0EB3C700729241 /* AppDelegate.m in Sources */,
+				E65A5AA81B12C49600BE9455 /* Menu.m in Sources */,
 				AE775DB61B0FE87300C53E8C /* Brick.m in Sources */,
 				E6A0762D1B0EB3C700729241 /* GameScene.m in Sources */,
 				E6A076271B0EB3C700729241 /* main.m in Sources */,
