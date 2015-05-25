@@ -10,7 +10,9 @@
 
 @implementation Menu {
     SKSpriteNode *_menuPanel;
+    SKLabelNode *_panelText;
     SKSpriteNode *_playButton;
+    SKLabelNode *_buttonText;
 }
 
 - (instancetype)init
@@ -21,9 +23,24 @@
         _menuPanel.position = CGPointZero;
         [self addChild:_menuPanel];
         
+        _panelText = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+        _panelText.fontColor = [SKColor colorWithRed:0.05 green:0.25 blue:0.44 alpha:1];
+        _panelText.fontSize = 15.0;
+        _panelText.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        _panelText.text = @"LEVEL 1";
+        [_menuPanel addChild:_panelText];
+        
         _playButton = [SKSpriteNode spriteNodeWithImageNamed:@"Button"];
         _playButton.position = CGPointMake(0, -((_menuPanel.size.height * 0.5) + (_playButton.size.height * 0.5) + 10));
         [self addChild:_playButton];
+        
+        _buttonText = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+        _buttonText.fontColor = [SKColor colorWithRed:0.05 green:0.25 blue:0.44 alpha:1];
+        _buttonText.fontSize = 15.0;
+        _buttonText.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
+        _buttonText.position = CGPointMake(0, 2);
+        _buttonText.text = @"PLAY";
+        [_playButton addChild:_buttonText];
     }
     return self;
 }
