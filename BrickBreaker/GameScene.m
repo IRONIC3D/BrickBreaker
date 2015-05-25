@@ -25,6 +25,7 @@
     int _currentLevel;
     BOOL _positionBall;
     NSArray *_hearts;
+    SKLabelNode *_levelDisplay;
 }
 
 #pragma mark -
@@ -70,6 +71,15 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         hud.anchorPoint = CGPointMake(0, 1);
         [self addChild:hud];
         
+        // Setup level display
+        _levelDisplay = [SKLabelNode labelNodeWithFontNamed:@"Futura"];
+        _levelDisplay.fontColor = [SKColor colorWithRed:0.05 green:0.25 blue:0.44 alpha:1];
+        _levelDisplay.fontSize = 15.0;
+        _levelDisplay.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
+        _levelDisplay.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
+        _levelDisplay.position = CGPointMake(10, -10);
+        _levelDisplay.text = @"LEVEL 1";
+        [hud addChild:_levelDisplay];
         
         // Setup hearts 26x22
         _hearts = @[[SKSpriteNode spriteNodeWithImageNamed:@"HeartFull"],
