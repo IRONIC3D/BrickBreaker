@@ -272,6 +272,7 @@ static const uint32_t kEdgeCategory       = 0x1 << 3;
     ball.physicsBody.velocity = velocity;
     ball.physicsBody.categoryBitMask = kBallCategory;
     ball.physicsBody.contactTestBitMask = kPaddleCategory | kBrickCategory | kEdgeCategory;
+    ball.physicsBody.collisionBitMask = kPaddleCategory | kBrickCategory | kEdgeCategory;
     [self addChild:ball];
     
     return ball;
@@ -305,7 +306,7 @@ static const uint32_t kEdgeCategory       = 0x1 << 3;
         case 3:
             level = @[@[@1, @0, @1, @1, @0, @1],
                       @[@1, @2, @1, @1, @0, @1],
-                      @[@0, @0, @3, @3, @0, @0],
+                      @[@4, @0, @3, @3, @0, @4],
                       @[@2, @0, @0, @0, @0, @2],
                       @[@0, @0, @1, @1, @0, @0],
                       @[@3, @2, @1, @1, @2, @3]];
@@ -352,6 +353,17 @@ static const uint32_t kEdgeCategory       = 0x1 << 3;
     return YES;
 }
 
+-(void)spawnExtraBall:(CGPoint)position {
+    CGVector direction;
+    if (arc4random_uniform(2) == 0) {
+        direction = CGVectorMake(cosf(M_PI_4), sinf(M_PI_4));
+    } else {
+        direction = CGVectorMake(cosf(M_PI * 0.75), sinf(M_PI * 0.75));
+    }
+    
+    [self createBallWithLocation:position andVelocity:CGVectorMake(direction.dx * _ballSpeed, direction.dy * _ballSpeed)];
+}
+
 #pragma mark -
 #pragma mark SKPhysics Delegate Method
 
@@ -388,6 +400,9 @@ static const uint32_t kEdgeCategory       = 0x1 << 3;
     if (firstBody.categoryBitMask == kBallCategory && secondBody.categoryBitMask == kBrickCategory) {
         if ([secondBody.node respondsToSelector:@selector(hit)]) {
             [secondBody.node performSelector:@selector(hit)];
+            if (((Brick*)secondBody.node).spawnsExtraBall) {
+                [self spawnExtraBall:[_brickLayer convertPoint:secondBody.node.position toNode:self]];
+            }
         }
         [self runAction:_ballBounceSound];
     }
