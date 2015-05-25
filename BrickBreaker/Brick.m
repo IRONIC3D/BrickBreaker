@@ -8,7 +8,9 @@
 
 #import "Brick.h"
 
-@implementation Brick
+@implementation Brick {
+    SKAction *_brickSmashSound;
+}
 
 -(instancetype)initWithType:(BrickType)type {
     switch (type) {
@@ -32,6 +34,8 @@
         self.physicsBody.dynamic = NO;
         self.type = type;
         self.indestructible = (type == Grey);
+        
+        _brickSmashSound = [SKAction playSoundFileNamed:@"BrickSmash.caf" waitForCompletion:NO];
     }
     
     return self;
@@ -43,6 +47,7 @@
             // By using an action, the removal of the brick will be delayed till the next frame
             // This way we can see the brick where the ball bounces of it, and removed on the next frame
             [self createExplosion];
+            [self runAction:_brickSmashSound];
             [self runAction:[SKAction removeFromParent]];
             break;
             
