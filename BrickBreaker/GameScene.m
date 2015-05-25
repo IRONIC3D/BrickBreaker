@@ -149,6 +149,10 @@ static const uint32_t kEdgeCategory       = 0x1 << 3;
             CGFloat paddleMinX = -_paddle.size.width * 0.25;
             CGFloat paddleMaxX = self.size.width + (_paddle.size.width * 0.25);
             
+            if (_positionBall) {
+                paddleMinX = _paddle.size.width * 0.5;
+                paddleMaxX = self.size.width - (_paddle.size.width * 0.5);
+            }
             
             // Cap paddles position so it remains on screen
             if (_paddle.position.x < paddleMinX) {
