@@ -12,6 +12,7 @@
 @interface GameScene()
 
 @property (nonatomic) int lives;
+@property (nonatomic) int currentLevel;
 
 @end
 
@@ -22,7 +23,6 @@
     CGFloat _ballSpeed;
     SKNode *_brickLayer;
     BOOL _ballReleased;
-    int _currentLevel;
     BOOL _positionBall;
     NSArray *_hearts;
     SKLabelNode *_levelDisplay;
@@ -30,6 +30,8 @@
 
 #pragma mark -
 #pragma mark Category Bit Masks
+
+static const int kFinalLevelNumber = 3;
 
 static const uint32_t kBallCategory         = 0x1 << 0;
 static const uint32_t kPaddleCategory       = 0x1 << 1;
@@ -78,7 +80,6 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         _levelDisplay.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeLeft;
         _levelDisplay.verticalAlignmentMode = SKLabelVerticalAlignmentModeTop;
         _levelDisplay.position = CGPointMake(10, -10);
-        _levelDisplay.text = @"LEVEL 1";
         [hud addChild:_levelDisplay];
         
         // Setup hearts 26x22
@@ -94,11 +95,11 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
         // Set initial values
         _ballSpeed = 250.0;
         _ballReleased = NO;
-        _currentLevel = 0;
+        self.currentLevel = 1;
         self.lives = 2;
         
         // Start a new level
-        [self loadLevel:_currentLevel];
+        [self loadLevel:self.currentLevel];
         [self newBall];
     }
     
@@ -152,20 +153,20 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
     /* Called before each frame is rendered */
     
     if ([self isLevelComplete]) {
-        _currentLevel++;
-        if (_currentLevel > 2) {
-            _currentLevel = 0;
+        self.currentLevel++;
+        if (self.currentLevel > kFinalLevelNumber) {
+            self.currentLevel = 1;
             self.lives = 2;
         }
-        [self loadLevel:_currentLevel];
+        [self loadLevel:self.currentLevel];
         [self newBall];
     } else if (_ballReleased && !_positionBall && ![self childNodeWithName:@"ball"]) {
         // Lost all balls.
         self.lives--;
         if (self.lives < 0) {
             self.lives = 2;
-            _currentLevel = 0;
-            [self loadLevel:_currentLevel];
+            self.currentLevel = 1;
+            [self loadLevel:self.currentLevel];
         }
         [self newBall];
     }
@@ -194,6 +195,11 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
             heart.texture = [SKTexture textureWithImageNamed:@"HeartEmpty"];
         }
     }
+}
+
+-(void)setCurrentLevel:(int)currentLevel {
+    _currentLevel = currentLevel;
+    _levelDisplay.text = [NSString stringWithFormat:@"LEVEL %d", currentLevel];
 }
 
 #pragma mark -
@@ -236,7 +242,7 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
     NSArray *level = nil;
     
     switch (LevelNumber) {
-        case 0:
+        case 1:
             level = @[@[@1, @1, @1, @1, @1, @1],
                       @[@0, @1, @1, @1, @1, @0],
                       @[@0, @0, @0, @0, @0, @0],
@@ -244,7 +250,7 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
                       @[@0, @2, @2, @2, @2, @0]];
             break;
             
-        case 1:
+        case 2:
             level = @[@[@1, @1, @2, @2, @1, @1],
                       @[@2, @2, @0, @0, @2, @2],
                       @[@2, @0, @0, @0, @0, @2],
@@ -253,7 +259,7 @@ static const uint32_t kPaddleCategory       = 0x1 << 1;
                       @[@1, @1, @3, @3, @1, @1]];
             break;
             
-        case 2:
+        case 3:
             level = @[@[@1, @0, @1, @1, @0, @1],
                       @[@1, @2, @1, @1, @0, @1],
                       @[@0, @0, @3, @3, @0, @0],
